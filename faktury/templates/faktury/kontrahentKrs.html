@@ -1,0 +1,20 @@
+{% extends 'faktury/base.html' %}
+
+{% block heads %}
+<title>Dodaj kontrahenta</title>
+{% endblock %}
+
+{% block content %}
+<form id="contact" action="" method="post">
+    {% csrf_token %}
+    <h3>
+    {{ form }}
+    </h3>
+
+    <h3><input type="submit" value="Submit"></h3>
+</form>
+
+<div><a href='/faktury/custom_kontrahent' >Wpisać dane kontrahenta</a></div>
+{% endblock %}
+
+

@@ -1,0 +1,18 @@
+{% extends 'faktury/base.html' %}
+
+{% block heads %}
+<title>Dodaj kontrahenta</title>
+{% endblock %}
+
+
+{% block content %}
+    <form action="" method="post">
+    {% csrf_token %}
+    <div class="col-lg-8 col-md-8 col-xs-12">
+    {{ form }}
+    </div>
+
+    <input type="submit" value="Submit">
+    </form>
+{% endblock %}
+
