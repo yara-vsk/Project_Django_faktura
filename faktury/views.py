@@ -47,14 +47,15 @@ def krs_searching(krs):
 
 def company_create(krs):
     data_c = krs_searching(krs)
-    Company.objects.create(
-        name=data_c['name'],
-        nip=data_c['nip'],
-        krs=data_c['krs'],
-        miasto=data_c['miasto'],
-        kod=data_c['kod'],
-        adres=data_c['adres']
-    )
+    if data_c:
+        Company.objects.create(
+            name=data_c['name'],
+            nip=data_c['nip'],
+            krs=data_c['krs'],
+            miasto=data_c['miasto'],
+            kod=data_c['kod'],
+            adres=data_c['adres']
+        )
     return Company.objects.filter(krs=krs)
 
 
@@ -85,6 +86,7 @@ def get_krs_kontrahent(request):
 
 
 @login_required(login_url='/login')
+@user_passes_test(test_func, login_url='/faktury/add_data_company/user')
 def get_dane_firmy(request,krs):
     if krs == "user":
         krs = request.user.krs
@@ -93,7 +95,8 @@ def get_dane_firmy(request,krs):
 
 
 @login_required(login_url='/login')
-def get_name(request):
+def create_company_manually(request, option):
+    add_information = False
     if request.method == 'POST':
         form = CompanyForm(request.POST)
         if form.is_valid():
@@ -105,10 +108,16 @@ def get_name(request):
                 kod=form.cleaned_data['kod'],
                 adres=form.cleaned_data['adres']
             )
+            if option =='user':
+                print(request.user)
+                request.user.krs=form.cleaned_data['krs']
+                request.user.save()
             return redirect(f'/')
     else:
         form = CompanyForm()
-    return render(request, 'faktury/kontrahent.html', {'form': form})
+        if option =='user':
+            add_information = True
+    return render(request, 'faktury/kontrahent.html', {'form': form,'inf':add_information})
 
 
 @login_required(login_url='/login')
