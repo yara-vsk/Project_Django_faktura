@@ -59,8 +59,8 @@ def sets_vat(myFaktura_id):
     return set(list_vat)
 
 
-def text_pdf(mycanvas,id_f, CompanyData):
-
+def text_pdf(mycanvas,id_f, data_user):
+    CompanyData = data_user[0]
     myFaktura=Faktura.objects.get(pk=id_f)
     textobject = mycanvas.beginText()
     mycanvas.translate(0,11*inch)
@@ -82,7 +82,7 @@ def text_pdf(mycanvas,id_f, CompanyData):
             ['', '', ''],
             [f'Data wystawienia: {myFaktura.data_wystawienia}\nMiejsce wystawienia: {myFaktura.miejsce_wystawienia}\nData dostawy/wykonania usługi: {myFaktura.data_wykonania}',
              '',
-              f'Termin płatności: {myFaktura.data_wystawienia + datetime.timedelta(days=myFaktura.termin_platnosci)} ({(myFaktura.termin_platnosci)} dni)\nSposób płatności: {myFaktura.sposob_platnosci}\nmBank\nPL 51 1140 2004 0000 3702 8134 3334']]
+              f'Termin płatności: {myFaktura.data_wystawienia + datetime.timedelta(days=myFaktura.termin_platnosci)} ({(myFaktura.termin_platnosci)} dni)\nSposób płatności: {myFaktura.sposob_platnosci}\n{data_user[2]}\n{data_user[1]}']]
     t2 = Table(data2,(3.135*inch,0.8*inch, 3.135*inch))
     t2.setStyle(TableStyle([
         #('LINEABOVE', (0,0), (-1,0), 1, colors.black),
@@ -188,7 +188,7 @@ def text_pdf(mycanvas,id_f, CompanyData):
     ]))
 
     data5 = [['', '', ''],
-             ['', '', 'Yaraslau Iadkouski'],
+             ['', '', ''],
              ['Imię, nazwisko i podpis osoby upoważnionej do\nodebrania dokumentu', '',
               'Imię, nazwisko i podpis osoby upoważnionej do\nwystawienia dokumentu']]
     t5 = Table(data5, (3.135 * inch, 0.8 * inch, 3.135 * inch))
@@ -234,8 +234,9 @@ def text_pdf(mycanvas,id_f, CompanyData):
     #mycanvas.drawText(textobject2)
 
 
-def create_pdf(id_faktura, company):
+def create_pdf(id_faktura, data_user):
     c = canvas.Canvas(f"media/faktura_{id_faktura}.pdf")
-    text_pdf(c,id_faktura, company)
+    #company = Company.objects.get(user.krs)
+    text_pdf(c,id_faktura, data_user)
     c.showPage()
     c.save()

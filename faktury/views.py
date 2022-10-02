@@ -157,5 +157,7 @@ def get_data(request):
 @user_passes_test(test_func, login_url='/')
 def get_pdf_faktura(request,link):
     company=Company.objects.get(krs=request.user.krs)
-    create_pdf(link, company)
+    b_number=request.user.B_account_number
+    b_name= request.user.Bank_name
+    create_pdf(link, (company,b_number,b_name))
     return render(request, 'faktury/download.html',{'cont':link})
