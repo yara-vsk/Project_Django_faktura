@@ -11,14 +11,14 @@ class NameCompanyForm(forms.Form):
 class FakturaForm(ModelForm):
     class Meta:
         model = Faktura
-        fields= ['number', 'sposob_platnosci', 'data_wykonania', 'termin_platnosci','company','data_wystawienia','miejsce_wystawienia']
+        fields= ['number', 'sposob_platnosci', 'data_wykonania', 'termin_platnosci','company_buy','data_wystawienia','miejsce_wystawienia']
         labels = {
             'number': _('Numer faktury'),
             'sposob_platnosci': _('Sposób platności'),
             'data_wykonania': _('Data wykonania'),
             'data_wystawienia': _('Data wystawienia'),
             'termin_platnosci': _('Termin platności'),
-            'company': _('Nabywca'),
+            'company_buy': _('Nabywca'),
             'miejsce_wystawienia': _('Miejsce wystawienia'),
         }
 

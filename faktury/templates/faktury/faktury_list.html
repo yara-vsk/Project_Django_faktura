@@ -1,0 +1,35 @@
+{% extends 'faktury/base.html' %}
+
+{% block heads %}
+<title>Faktury</title>
+{% endblock %}
+
+
+{% block content %}
+
+    <table border="1">
+        <thead>
+          <tr>
+              <th><h3>Numer faktury</h3></th>
+            <th><h3>Data wystawienia</h3></th>
+            <th><h3>Actions</h3></th>
+          </tr>
+        </thead>
+        <tbody>
+        {% for obj in object_list %}
+            <tr>
+                <td><h3>{{ obj.number }}</h3></td>
+                <td><h3>{{ obj.data_wystawienia|date }}</h3></td>
+                <td><h3>
+                    <a href="/faktury/download/{{obj.id}}">Download</a>
+                </h3></td>
+            </tr>
+        {% empty %}
+            <tr><h3>
+                <td colspan="5">no items</td>
+            </h3></tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}

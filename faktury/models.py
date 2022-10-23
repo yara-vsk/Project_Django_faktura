@@ -46,17 +46,19 @@ class Faktura(models.Model):
         m1 = 'przelew na rachunek bankowy', _('przelew na rachunek bankowy')
         m2 = 'gotówka', _('gotówka')
         m3 = 'karta płatnicza', _('karta płatnicza')
-    number = models.CharField(max_length=20, unique=True)
+    number = models.CharField(max_length=20)
     data_wystawienia=models.DateField()
     miejsce_wystawienia=models.CharField(max_length=45)
     data_wykonania=models.DateField()
     sposob_platnosci=models.CharField(max_length=45,choices=MetodyPlatnosci.choices, default=MetodyPlatnosci.m2)
     termin_platnosci=models.IntegerField()
-    elementy_sprzedazy=models.ManyToManyField(ElementSprzedazy, through='Faktura_elementy')
-    company=models.ForeignKey(Company, on_delete=models.CASCADE)
+    elementy_sprzedazy = models.ManyToManyField(ElementSprzedazy, through='Faktura_elementy')
+    company_buy = models.ForeignKey(Company, on_delete=models.CASCADE)
+    company_sell = models.ForeignKey(Company, on_delete=models.CASCADE, related_name='User_Company')
 
     def __str__(self):
         return self.number
+
 
 
 class Faktura_elementy(models.Model):

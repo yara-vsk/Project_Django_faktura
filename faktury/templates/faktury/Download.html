@@ -8,8 +8,11 @@
 {% block content %}
 
                 <div>
+                    {% if cont %}
 
-                    <a href="/media/faktura_{{cont}}.pdf" download>Pobierz fakturę</a>
+                    <a href="/{{cont}}" download>Pobierz fakturę w formie PDF</a>
+
+                    {% endif %}
 
                 </div>
 

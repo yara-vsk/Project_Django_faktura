@@ -78,7 +78,7 @@ def text_pdf(mycanvas,id_f, data_user):
     data2 = [['Sprzedawca:','', 'Nabywca:'],
             [f'{name_element_zawijanie(CompanyData.name,45)}\nul. {CompanyData.adres}\n{CompanyData.kod} {CompanyData.miasto}\nNIP: {CompanyData.nip}',
              '',
-             f'{name_element_zawijanie(myFaktura.company.name,45)}\nul. {myFaktura.company.adres}\n{myFaktura.company.kod} {myFaktura.company.miasto}\nNIP: {myFaktura.company.nip}'],
+             f'{name_element_zawijanie(myFaktura.company_buy.name,45)}\nul. {myFaktura.company_buy.adres}\n{myFaktura.company_buy.kod} {myFaktura.company_buy.miasto}\nNIP: {myFaktura.company_buy.nip}'],
             ['', '', ''],
             [f'Data wystawienia: {myFaktura.data_wystawienia}\nMiejsce wystawienia: {myFaktura.miejsce_wystawienia}\nData dostawy/wykonania usługi: {myFaktura.data_wykonania}',
              '',
@@ -235,7 +235,7 @@ def text_pdf(mycanvas,id_f, data_user):
 
 
 def create_pdf(id_faktura, data_user):
-    c = canvas.Canvas(f"media/faktura_{id_faktura}.pdf")
+    c = canvas.Canvas(f"media/Faktura_{id_faktura}_{'1'.join([x for x in (data_user[0].krs) if x != '0'])}.pdf")
     #company = Company.objects.get(user.krs)
     text_pdf(c,id_faktura, data_user)
     c.showPage()
