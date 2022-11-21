@@ -8,6 +8,7 @@ from django.utils.translation import gettext_lazy as _
 class NameCompanyForm(forms.Form):
     name = forms.CharField(label='Name of company', max_length=300)
 
+
 class FakturaForm(ModelForm):
     class Meta:
         model = Faktura

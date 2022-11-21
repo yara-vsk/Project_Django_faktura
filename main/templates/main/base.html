@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link href="https://fonts.googleapis.com/css?family=Raleway:100,200,300,400,500,600,700,800,900&display=swap" rel="stylesheet">
+
+    <title>Autoryzacja</title>
+
+    <link rel="stylesheet" type="text/css" href="{% static 'main/css/bootstrap.min.css'%}">
+
+    <link rel="stylesheet" type="text/css" href="{% static 'main/css/font-awesome.css'%}">
+
+    <link rel="stylesheet" href="{% static 'main/css/templatemo-breezed.css'%}">
+
+    <link rel="stylesheet" href="{% static 'main/css/owl-carousel.css'%}">
+
+    <link rel="stylesheet" href="{% static 'main/css/lightbox.css'%}">
+    {% block heads %}
+    {% endblock %}
+</head>
+<body>
+
+<!-- ***** Header Area Start ***** -->
+    <header class="header-area header-sticky">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <nav class="main-nav">
+                        <!-- ***** Logo Start ***** -->
+                        <a href="/" class="logo">
+                            YI
+                        </a>
+                        <!-- ***** Logo End ***** -->
+                        <!-- ***** Menu Start ***** -->
+                        <ul class="nav">
+                            <li class="scroll-to-section"><a href="/">Home</a></li>
+                            <li class="scroll-to-section"><a href="/about">About</a></li>
+                            <li class="scroll-to-section"><a href="projects">Projects</a></li>
+                            <li class="submenu">
+                                <a href="javascript:;">Księgowość</a>
+                                <ul>
+                                    <li><a href="faktury/kontrahent">Dodaj kontrahenta</a></li>
+                                    <li><a href="faktury/">Wystawienie faktury</a></li>
+                                </ul>
+                            </li>
+                            <li class="scroll-to-section"><a href="/#contact-us">Contact Us</a></li>
+                            {% if request.user.is_authenticated %}
+                            <li class="submenu">
+                                <a href="javascript:;">{{ user.username }}</a>
+                                <ul>
+                                    <li><a href="/">Dane firmy</a></li>
+                                    <li><a href="logout/">Wyloguj się</a></li>
+                                </ul>
+                            </li>
+                            {% else %}
+                            <li class="scroll-to-section" ><a href="/login" class="active">Zaloguj się</a></li>
+                            <li class="scroll-to-section"><a href="/register">Zarejestruj się</a></li>
+                            {% endif %}
+                            <div class="search-icon">
+                                <a href="#search"><i class="fa fa-search"></i></a>
+                            </div>
+                        </ul>
+                        <a class='menu-trigger'>
+                            <span>Menu</span>
+                        </a>
+                        <!-- ***** Menu End ***** -->
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- ***** Header Area End ***** -->
+
+<div class="main-banner header-text" id="top">
+    <div class="Modern-Slider">
+    <div class="item">
+        <div class="img-fill">
+        <img src="{% static 'XXXXXXXXXXXXXXXXXXXXX_faktury/images/slide-02.jpg'%}" alt="">
+            <div class="text-content">
+                <div class="section-heading">
+
+
+                    {% block content %}
+                    {% endblock %}
+
+                </div>
+                </div>
+            </div>
+    </div>
+    </div>
+    </div>
+
+</body>
+</html>

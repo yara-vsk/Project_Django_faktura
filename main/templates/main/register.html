@@ -1,17 +1,21 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Rejestracja</title>
-</head>
-<body>
+{% extends 'main/base.html' %}
+
+{% block heads %}
+<title>Logowanie</title>
+{% endblock %}
+
+{% block content %}
 <form method="post">
     {% csrf_token %}
     {% for f in form %}
-    <p><label class="form-label" for="{{f.id_for_label}}">{{f.label}}:</label>{{f}}</p>
-    <div class="form-error">{{f.errors}}</div>
+    <table>
+        <tr>
+            <td><h3><label class="form-label" for="{{f.id_for_label}}">{{f.label}}</label>&nbsp </h3></td>
+            <td><h3>{{f}}</h3></td>
+        </tr>
+        <div class="form-error">{{f.errors}}</div>
+    </table>
     {% endfor %}
     <input type="submit" value="Rejestracja">
 </form>
-</body>
-</html>
+{% endblock %}
